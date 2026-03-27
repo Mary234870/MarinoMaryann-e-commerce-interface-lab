@@ -1,16 +1,16 @@
 :root {
-    --primary-color: #2c3e50;
-    --accent-color: #e67e22;
-    --bg-light: #f4f4f4;
-    --text-main: #333333;
-    --white: #ffffff;
-    --border-color: #dddddd;
+    --primary-color: #e76969;
+    --accent-color: #a99ca4;
+    --bg-light: hsl(0, 35%, 16%);
+    --text-main: #f4d4d4;
+    --white: #150f0f;
+    --border-color: #5113a8;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --focus-outline: #3498db;
-    --active-press: #c0392b;
+    --active-press: #efdfdd;
     --success-color: #27ae60;
-    --error-color: #e74c3c;
-    --card-alt: #ecf0f1;
+    --error-color: #dfc0c0;
+    --card-alt: #14a6cb;
 }
 
 body {
@@ -412,41 +412,89 @@ img {
 }
 
 .hero-section {
-    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-    padding: 40px 20px;
-    border-radius: 10px;
+    background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(230, 126, 34, 0.85)),
+                url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f') no-repeat center/cover;
+    padding: 80px 20px;
+    border-radius: 15px;
     margin: 20px 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 200px;
     color: var(--white);
+    position: relative;
+    overflow: hidden;
 }
 
+/* Dark overlay effect */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+}
+
+/* Title */
 .hero-section h1 {
-    color: var(--white);
-    border-bottom: 3px solid var(--white);
+    font-size: 2.8em;
     margin-bottom: 15px;
+    border: none;
 }
 
+/* Subtitle */
 .hero-section p {
     font-size: 1.2em;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    color: #f1f1f1;
 }
 
-.hero-section button {
-    width: auto;
-    padding: 12px 30px;
-    background-color: var(--white);
-    color: var(--accent-color);
+/* Buttons container */
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
-.hero-section button:hover {
+/* Primary button */
+.hero-btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hero-btn-primary:hover {
     background-color: var(--primary-color);
-    color: var(--white);
 }
+
+/* Secondary button */
+.hero-btn-secondary {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hero-btn-secondary:hover {
+    background-color: white;
+    color: var(--primary-color);
+}
+
 
 .fade-in {
     animation: fadeHighlight 0.5s ease-in-out;
