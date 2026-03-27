@@ -990,4 +990,17 @@ document.addEventListener('DOMContentLoaded', () => {
     updateOrderSummary();
     
     console.log("Initialization complete");
+    // Get stored name
+const username = localStorage.getItem("username");
+
+// Select the header
+const welcomeText = document.querySelector("#welcome-text");
+
+// Display name if exists
+if (username && welcomeText) {
+    welcomeText.textContent = `Welcome back ${username}`;
+    // Example: save name
+const name = "Mary-Ann"; // replace this with input value
+localStorage.setItem("username", name);
+}
 });
