@@ -1,107 +1,105 @@
 function checkVariable(input) {
     switch (typeof input) {
         case 'string':
-            return 'string';
         case 'number':
-            return 'number';
         case 'boolean':
-            return 'boolean';
         case 'bigint':
-            return 'bigint';
-        case 'object':
-            return 'object'; 
+        case 'undefined':
+            return typeof input;
         default:
-            return typeof input; 
+            return 'object';
     }
 }
-console.log(checkVariable("hello"));    
-console.log(checkVariable(42));          
-console.log(checkVariable(true));        
-console.log(checkVariable(123n));        
-console.log(checkVariable({}));         
-console.log(checkVariable(null));        
-console.log(checkVariable(undefined));   
-
 
 function generateIDs(count) {
     const ids = [];
     for (let i = 0; i < count; i++) {
         if (i === 5) {
-            continue;d
+            continue;
         }
         ids.push(`ID-${i}`);
     }
     return ids;
 }
-console.log(generateIDs(7)); 
-
 
 function calculateTotal(...numbers) {
-    for (let num of numbers) {
-        if (typeof num !== 'number' || isNaN(num)) {
-            throw new TypeError("Invalid input: All arguments must be numbers");
+    return numbers.reduce((sum, current) => {
+        if (typeof current !== 'number') {
+            throw new TypeError('Invalid input: All arguments must be numbers');
         }
-    }
-    return numbers.reduce((sum, num) => sum + num, 0);
+        return sum + current;
+    }, 0);
 }
-console.log(calculateTotal(1, 2, 3, 5));  
-console.log(calculateTotal(5.5, 2.3));    
-
 
 function getTopScorers(playerList) {
     return playerList
-        .filter(player => player.score > 8)     
-        .map(player => player.name)             
-        .join(', ');                             
+        .filter(player => player.score > 8)
+        .map(player => player.name)
+        .join(', ');
 }
 
-
-const players = [
-    {name: "Alexa", score: 11},
-    {name: "Bobby", score: 15},
-    {name: "Charline", score: 7},
-    {name: "Jena", score: 2},
-    {name: "Ivan", score: 7},
-    {name: "Francine", score: 10},
-    {name: "Grace", score: 8},
-    {name: "Hans", score: 15},
-    {name: "Yvann", score: 5},
-    {name: "Jack", score: 9}
-];
-console.log(getTopScorers(players)); 
-
-
 class Item {
-    #discount = 0.1; 
-    
+    #discount = 0.1; // 10% discount
+
     constructor(name, price) {
         this.name = name;
         this.price = price;
     }
-    
+
     get finalPrice() {
-        return this.price * (1 - this.#discount);
+        return this.price - (this.price * this.#discount);
     }
 }
-const laptop = new Item("Laptop", 1000);
-const phone = new Item("Phone", 500);
-
-console.log(`${laptop.name}: $${laptop.price} -> Final: $${laptop.finalPrice.toFixed(2)}`);
-console.log(`${phone.name}: $${phone.price} -> Final: $${phone.finalPrice.toFixed(2)}`);
-
 
 function safeDivide(a, b) {
     try {
         if (b === 0) {
-            throw new Error("Cannot divide by zero");
+            throw new Error('Cannot divide by zero');
         }
-        return a / b; 
+        return a / b;
     } catch (error) {
-        return error.message;  
+        return error.message;
     } finally {
-        console.log("Operation attempted"); 
+        console.log('Operation attempted');
     }
 }
-console.log("10 ÷ 2 =", safeDivide(10, 2));    
-console.log("10 ÷ 0 =", safeDivide(10, 0));     
-console.log("8 ÷ 4 =", safeDivide(8, 4));       
+
+console.log('=== Problem 1: Strict Type Checker ===');
+console.log(checkVariable('hello'));  // string
+console.log(checkVariable(42));        // number
+console.log(checkVariable(true));      // boolean
+console.log(checkVariable(123n));      // bigint
+console.log(checkVariable(undefined)); // undefined
+console.log(checkVariable(null));      // object
+console.log(checkVariable({}));        // object
+
+console.log('\n=== Problem 2: Secure ID Generator ===');
+console.log(generateIDs(7));
+
+console.log('\n=== Problem 3: Functional Sum ===');
+console.log(calculateTotal(1, 2, 3, 4)); 
+try {
+    console.log(calculateTotal(1, '2', 3));
+} catch (error) {
+    console.log(error.message);
+}
+
+console.log('\n=== Problem 4: Leaderboard Filter ===');
+const players = [
+    { name: 'Joyce', score: 10 },
+    { name: 'Mary', score: 5 },
+    { name: 'Jean', score: 9 },
+    { name: 'Joy', score: 7 },
+    { name: 'Kyle', score: 12 }
+];
+console.log(getTopScorers(players));
+
+console.log('\n=== Problem 5: Private Inventory ===');
+const item = new Item('Laptop', 1000);
+console.log(item.name);         
+console.log(item.price);        
+console.log(item.finalPrice);   
+
+console.log('\n=== Problem 6: Robust Division ===');
+console.log(safeDivide(10, 2));   
+console.log(safeDivide(10, 0));   
